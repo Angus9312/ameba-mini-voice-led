@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AMB82-MINI｜語音控制台</title>
+  <meta name="description" content="在 Mac 本機辨識中文語音，控制 AMB82-MINI 的藍燈與綠燈。">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script>
+</head>
+<body>
+<main>
+  <header><div><p class="eyebrow">AMB82-MINI <span>VOICE LAB / 03</span></p><h1>語音控制台</h1></div><span class="local-label">本機辨識 · USB 控制</span></header>
+  <section class="connection" aria-label="連線設定">
+    <div class="connection-info"><span id="connection-dot" class="dot"></span><div><strong id="connection-status">尚未連接開發板</strong><p id="model-status">正在確認語音模型…</p></div></div>
+    <div class="actions"><button id="connect" class="primary">連接 AMB82-MINI</button><button id="stop" class="danger">停止並斷線</button></div>
+  </section>
+  <div id="notice" role="status" aria-live="polite">先上傳 03_voice_led，關閉 Arduino 序列埠監控視窗，再連接開發板。</div>
+  <div class="workspace">
+    <section class="panel voice-panel" aria-labelledby="voice-title">
+      <div class="section-heading"><h2 id="voice-title">說出你的指令</h2><span class="small-label" id="speech-status">尚未啟用麥克風</span></div>
+      <div class="voice-controls"><button id="enable-mic" class="secondary">啟用麥克風</button><button id="record" class="record" disabled><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg><span id="record-label">按住說話</span></button><p class="hint">按住錄音，放開後辨識。也可按住空白鍵。</p><meter id="volume" min="0" max="1" value="0" aria-label="麥克風音量"></meter></div>
+      <div class="transcript-box"><p class="eyebrow">辨識到的語句</p><p id="transcript" aria-live="polite">等待你的聲音…</p><p id="decision">每次說一句；辨識完成後才會執行。</p></div>
+      <div class="phrases" aria-label="支援的語音"><span>左邊開燈</span><span>右邊開燈</span><span>左邊閃爍三次</span><span>右邊閃爍三次</span><span>左邊關燈</span><span>右邊關燈</span><span class="stop-phrase">通訊中斷</span></div>
+      <p class="hint">「通訊中斷」辨識成立後，停止收音與控制並關閉連線。需要立刻停止時，點右上角按鈕。</p>
+    </section>
+    <section class="panel led-panel" aria-labelledby="led-title">
+      <div class="section-heading"><h2 id="led-title">開發板回報</h2><span class="small-label" id="last-report">尚未收到回覆</span></div>
+      <article class="lamp-card blue"><div class="lamp-top"><span class="eyebrow">LEFT / 左邊</span><span class="pin">PF9 · 23</span></div><div class="lamp-main"><span id="blue-indicator" class="lamp-indicator unknown"></span><div><h3>藍燈</h3><p id="blue-state">未知</p></div></div><div class="lamp-actions"><button data-command="BLUE_ON" disabled>開燈</button><button data-command="BLUE_OFF" disabled>關燈</button><button data-command="BLUE_BLINK3" disabled>閃爍三次</button></div></article>
+      <article class="lamp-card green"><div class="lamp-top"><span class="eyebrow">RIGHT / 右邊</span><span class="pin">PE6 · 24</span></div><div class="lamp-main"><span id="green-indicator" class="lamp-indicator unknown"></span><div><h3>綠燈</h3><p id="green-state">未知</p></div></div><div class="lamp-actions"><button data-command="GREEN_ON" disabled>開燈</button><button data-command="GREEN_OFF" disabled>關燈</button><button data-command="GREEN_BLINK3" disabled>閃爍三次</button></div></article>
+      <p class="hint">依開發板回覆顯示 GPIO 輸出；LED 是否真的發光，請同時觀察實體板子。閃爍三次後保持熄滅。</p>
+    </section>
+  </div>
+  <section class="panel log-panel"><div class="section-heading"><h2>操作紀錄</h2><button id="export" class="text-button">匯出紀錄</button></div><div class="log-header"><span>時間</span><span>來源</span><span>事件與結果</span></div><ol id="log"><li class="empty">連線、辨識與指令回覆會記錄在這裡。</li></ol></section>
+  <footer><span>語音僅在這台 Mac 運算，錄音不儲存。</span><span>非控制語句不送出 LED 指令。</span></footer>
+</main>
+</body></html>

@@ -1,0 +1,26 @@
+# Local dependencies and downloaded Whisper models
+.venv/
+venv/
+.models/
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# Secrets, recordings, logs and generated firmware
+.env
+.env.*
+!.env.example
+*.wav
+*.aiff
+*.mp3
+*.log
+*.bin
+*.elf
+*.map
+ameba-test-log*.json
+
+# Earlier exercises and scratch tests are kept outside this repository
+firmware/01_led_check/
+firmware/02_serial_led/
+tests/
+work/
